@@ -49,19 +49,18 @@ public class StartPage extends AbstractPage {
 		return new MainPage(setup);
 	}
 
-	public MainPage loginAfterAnotherUser(String userName, String password) {
-		try {
+	public MainPage loginSecondTime(String userName, String password) throws InterruptedException {
+		
 			loginAfterAnotherUserLink.click();
-			setup.getDriver().switchTo().alert().accept();
-		} finally {
-			wait.waitVisibilityOf(setup, addAccount);
+		
+		        Thread.sleep(5000);
 			addAccount.click();
 			userNameLocator.sendKeys(userName);
 			nextButton.click();
 			passwordLocator.sendKeys(password);
 			loginButtonLocator.click();
 			return new MainPage(setup);
-		}
+		
 	}
 
 }

@@ -14,8 +14,8 @@ public class ThemesPage extends AbstractPage {
 	 private int currentThemeIndex;
 
 	   
-	    public static final String THEMES_LIST = "//div[@class='J-J5-Ji sj']";
-	    public static final String THEMES_LIST_SELECTOR = "//div[@class='J-J5-Ji sj']/div/div";
+	    public static final String THEMES_LIST = "//*[@class='J-J5-Ji sj']";
+	    public static final String THEMES_LIST_SELECTOR = "//*[@class='J-J5-Ji sj']/div/div";
 
 
 
@@ -29,7 +29,7 @@ public class ThemesPage extends AbstractPage {
 	        super(setup);
 	    }
 
-	    public int getCurrentThemeIndex(){
+	    public int getThemeIndex(){
 	        for(int i = 0; i < themesListSelector.size(); i++) {
 	            if (themesListSelector.get(i).getAttribute("class").equals("sh")){
 	                currentThemeIndex = i;
@@ -42,7 +42,7 @@ public class ThemesPage extends AbstractPage {
 	    public void selectRandomTheme() throws InterruptedException{
 	        Random rnd = new Random();
 	        int randomIndex = rnd.nextInt(themesList.size());
-	        while(randomIndex == getCurrentThemeIndex()) {
+	        while(randomIndex == getThemeIndex()) {
 	            randomIndex = rnd.nextInt(themesList.size());
 	        }
 	        themesList.get(randomIndex).click();

@@ -1,7 +1,8 @@
 package com.epam.gura;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.WebDriver;
 
 public class BaseTest {

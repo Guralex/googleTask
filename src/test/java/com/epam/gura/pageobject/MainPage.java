@@ -92,7 +92,7 @@ public class MainPage extends AbstractPage {
         Thread.sleep(5000);
      }
 
-    public SpamPage goToSpamFolder() throws InterruptedException{
+    public SpamPage goToSpam() throws InterruptedException{
         searchField.sendKeys("in:spam");
         searchButton.click();
         Thread.sleep(5000);
@@ -100,22 +100,21 @@ public class MainPage extends AbstractPage {
     }
     
 
-    public void dragAndDropLatestLetterToStarred() throws InterruptedException{
+    public void dragNDrop() throws InterruptedException{
     	  Actions actionDragAndDrop = new Actions(setup.getDriver());
-          wait.waitVisibilityOf(setup, latestInboxLetter);
-          wait.waitVisibilityOf(setup, starredButton);
+          Thread.sleep(5000);
           actionDragAndDrop.dragAndDrop(latestInboxLetter, starredButton).perform();
     }
     
-    public StarredPage goToStarredPage(){
+    public StarredPage goToStarred(){
         starredButton.click();
         return new StarredPage(setup);
     }
 
-    public ThemesPage goToThemesPage(){
-        wait.waitVisibilityOf(setup, settingsButton);
+    public ThemesPage goToThemes() throws InterruptedException{
+        Thread.sleep(2000);
         settingsButton.click();
-        wait.waitVisibilityOf(setup, themesOption);
+        Thread.sleep(2000);
         themesOption.click();
         return new ThemesPage(setup);
     }
