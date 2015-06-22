@@ -30,7 +30,7 @@ public class Main extends BaseTest {
         Thread.sleep(2000);
         StarredPage starredPage = main.goToStarred();
         Assert.assertTrue(starredPage.getLatestMessageTheme().contains(
-                MAIL_SUBJECT));
+                MAIL_SUBJECT),"Element is not in starred folder");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class Main extends BaseTest {
         int defaultThemeIndex = themesPage.getThemeIndex();
         themesPage.selectRandomTheme();
         int selectedThemeIndex = themesPage.getThemeIndex();
-        Assert.assertTrue(defaultThemeIndex != selectedThemeIndex);
+        Assert.assertTrue(defaultThemeIndex != selectedThemeIndex,"Theme is not changed");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class Main extends BaseTest {
         main = start.loginSecondTime(USER_TWO, PASSWORD_TWO);
         SpamPage spam = main.goToSpam();
 
-        Assert.assertTrue(spam.getLatestMessageTheme().contains(MAIL_SUBJECT));
+        Assert.assertTrue(spam.getLatestMessageTheme().contains(MAIL_SUBJECT),"Element is not in spam folder");
 
     }
 }
