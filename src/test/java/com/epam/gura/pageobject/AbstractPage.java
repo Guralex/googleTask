@@ -1,16 +1,15 @@
 package com.epam.gura.pageobject;
 
-import com.epam.gura.Setup;
-import com.epam.gura.helpers.WaiterHelper;
+import com.epam.gura.WebDriverFactory;
+
 import org.openqa.selenium.support.PageFactory;
 
-
 public abstract class AbstractPage {
-    protected Setup setup;
-    protected WaiterHelper wait = new WaiterHelper();
 
-    public AbstractPage(Setup setup) {
-        this.setup = setup;
-        PageFactory.initElements(setup.getDriver(), this);
+    WebDriverFactory driver;
+
+    public AbstractPage(WebDriverFactory driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver.getDriver(), this);
     }
 }

@@ -3,25 +3,21 @@ package com.epam.gura.pageobject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.epam.gura.Setup;
+import com.epam.gura.WebDriverFactory;
 
 public class SpamPage extends AbstractPage {
 
-	
-	 private static final String LATEST_MESSAGE = "(//*[@role='main']//tr)[1]/td[6]//b";
+    public SpamPage(WebDriverFactory driver) {
+        super(driver);
+    }
 
-		@FindBy(xpath = LATEST_MESSAGE)
-		private WebElement latestMessage;
+    private static final String MESSAGE = "(//*[@role='main']//tr)[1]/td[6]//b";
 
-	    public String getLatestMessageTheme() {
-	        return latestMessage.getText();
-	    }
+    @FindBy(xpath = MESSAGE)
+    private WebElement latestMessage;
 
-	    public SpamPage(Setup setup) {
-	        super(setup);
-	    }
-    
-      }
-	
+    public String getMessageTheme() {
+        return latestMessage.getText();
+    }
 
-
+}

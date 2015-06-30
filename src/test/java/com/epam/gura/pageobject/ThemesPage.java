@@ -6,49 +6,46 @@ import java.util.Random;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import com.epam.gura.Setup;
+import com.epam.gura.WebDriverFactory;
 
 public class ThemesPage extends AbstractPage {
 
-	
-	 private int currentThemeIndex;
+    public static final String THEMES_LIST = "//*[@class='J-J5-Ji sj']";
+    public static final String THEMES_NAMES = "//*[@class='J-J5-Ji sj']//input";
+    public static final String CURRENT_THEME = "//*[@class='sh']//input";
 
-	   
-	    public static final String THEMES_LIST = "//*[@class='J-J5-Ji sj']";
-	    public static final String THEMES_LIST_SELECTOR = "//*[@class='J-J5-Ji sj']/div/div";
+    @FindBy(xpath = THEMES_NAMES)
+    private List<WebElement> themesNames;
 
+    @FindBy(xpath = THEMES_LIST)
+    private List<WebElement> themesList;
 
+    @FindBy(xpath = CURRENT_THEME)
+    private WebElement currentTheme;
 
-	    @FindBy(xpath = THEMES_LIST)
-	    private List<WebElement> themesList;
+    public void selectNewTheme() {
 
-	    @FindBy(xpath = THEMES_LIST_SELECTOR)
-	    private List<WebElement> themesListSelector;
+        int i;
+        Random r = new Random();
+        String name = currentTheme.getAttribute("name");
 
-	    public ThemesPage(Setup setup) {
-	        super(setup);
-	    }
+        while (true) {
 
-	    public int getThemeIndex(){
-	        for(int i = 0; i < themesListSelector.size(); i++) {
-	            if (themesListSelector.get(i).getAttribute("class").equals("sh")){
-	                currentThemeIndex = i;
-	                break;
-	            }
-	        }
-	        return currentThemeIndex;
-	    }
+            i = r.nextInt(themesNames.size());
+            if (!themesNames.get(i).getAttribute("name").equals(name)) {
+                themesList.get(i).click();
+                break;
+            }
 
-	    public void selectRandomTheme() throws InterruptedException{
-	        Random rnd = new Random();
-	        int randomIndex = rnd.nextInt(themesList.size());
-	        while(randomIndex == getThemeIndex()) {
-	            randomIndex = rnd.nextInt(themesList.size());
-	        }
-	        themesList.get(randomIndex).click();
-	       Thread.sleep(2000);
-	    }
-      }
-	
+        }
 
+    }
 
+    public ThemesPage(WebDriverFactory driver) {
+        super(driver);
+    }
+
+    public String getCurrentName() {
+        return currentTheme.getAttribute("name");
+    }
+}

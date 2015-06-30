@@ -1,22 +1,18 @@
 package com.epam.gura;
 
-
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.openqa.selenium.WebDriver;
 
 public class BaseTest {
-    protected static Setup setup;
-    protected WebDriver driver;
+    protected static WebDriverFactory driver;
 
     @BeforeClass
-    public static void preconditions(){
-       
-        setup = new Setup("Chrome",5);
+    public static void preconditions() {
+        driver = new WebDriverFactory("Chrome");
     }
 
     @AfterClass
-    public static void postconditions(){
-        setup.getDriver().quit();
+    public static void postconditions() {
+        driver.getDriver().quit();
     }
 }
